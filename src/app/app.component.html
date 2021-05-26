@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="header">
-		<h1>Live Nano election visualization</h1>
-		<span>Every line is a block waiting to be validated. When the quorum reaches 100%, the block is confirmed. This data is based on the perspective of a single <a [href]="'https://mynano.ninja/account/' + hostAccount" target="_blank">node</a>.</span><br><br>
+		<h1>Beta Nano election visualization</h1>
+		<span>Every line is a block waiting to be validated. When the quorum reaches 100%, the block is confirmed. This data is based on the perspective of a single <a [href]="'https://beta.nanocrawler.cc/explorer/account/' + hostAccount" target="_blank">node</a>.</span><br><br>
 		<div class="settings-trigger" (click)="showSettings = !showSettings"></div>
 		<div class="settings-container" *ngIf="showSettings">
 			<div class="setting-container">
@@ -56,7 +56,7 @@
 				<th class="text-right">Participation %</th>
 				<tr *ngFor="let rep of representativeStats | keyvalue | orderBy: 'desc': 'value.voteCount'">
 					<td>
-						<a [href]="'https://mynano.ninja/account/' + rep.key" target="_blank">{{ rep.value.alias || rep.key }}</a>
+						<a [href]="'https://beta.nanocrawler.cc/account/' + rep.key" target="_blank">{{ rep.value.alias || rep.key }}</a>
 					</td>
 					<td class="text-right">
 						{{ rep.value.weight | percent: '1.2-2' }}
@@ -80,8 +80,8 @@
 				<th class="text-right">Amount</th>
 				<tr *ngFor="let confirmation of latestConfirmations">
 					<td>
-						<a [href]="'https://nanolooker.com/account/' + confirmation.account" target="_blank">{{ confirmation.account }}</a><br>
-						<a [href]="'https://nanolooker.com/block/' + confirmation.hash" target="_blank">{{ confirmation.hash }}</a>
+						<a [href]="'https://beta.nanocrawler.cc/account/' + confirmation.account" target="_blank">{{ confirmation.account }}</a><br>
+						<a [href]="'https://beta.nanocrawler.cc/block/' + confirmation.hash" target="_blank">{{ confirmation.hash }}</a>
 					</td>
 					<td class="text-right">
 						{{ confirmation.amount }}

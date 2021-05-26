@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	readonly maxTimeframe = 10;
 	readonly maxFps = 60;
-	readonly hostAccount = 'nano_3zapp5z141qpjipsb1jnjdmk49jwqy58i6u6wnyrh6x7woajeyme85shxewt';
+	readonly hostAccount = 'nano_1json51qn9t7cqebcds1b7f9t3cffbki7qanudqpo67xcpowpt1org1p9rus';
 
 	constructor(private ws: NanoWebsocketService,
 		private changeDetectorRef: ChangeDetectorRef) {

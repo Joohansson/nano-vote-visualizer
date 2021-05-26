@@ -10,10 +10,11 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class NanoWebsocketService {
 
-	wsUrl = 'wss://nanows.numsu.dev';
-	rpcUrl = 'https://nanoproxy.numsu.dev/proxy';
+	wsUrl = 'wss://ws-beta.nanoticker.info';
+	rpcUrl = 'https://beta-proxy.nanos.cc';
 
 	principals: Principal[] = [];
+	betaPrincipals : BetaPrincipal[] = [];
 	principalWeights = new Map<string, number>();
 	quorumPercent: number;
 	onlineStake: number;
@@ -90,12 +91,14 @@ export class NanoWebsocketService {
 
 	async updatePrincipalsAndQuorum() {
 		try {
-			this.principals = await this.http.get<Principal[]>('https://mynano.ninja/api/accounts/principals').toPromise();
-			this.principals.forEach(p => this.principalWeights.set(p.account, new BigNumber(p.votingweight).shiftedBy(-30).toNumber()));
-
+			this.betaPrincipals = await this.http.get<BetaPrincipal[]>('https://json.nanoticker.info/?file=monitors-beta').toPromise();  
+      
 			const quorumResponse = await this.http.post<ConfirmationQuorumResponse>(this.rpcUrl, {
 				'action': 'confirmation_quorum'
 			}).toPromise();
+
+     	this.betaPrincipals.forEach(p => this.principalWeights.set(p.nanoNodeAccount, p.weight));
+      this.principals = this.betaPrincipals.map(d => { return {'account' : d.nanoNodeAccount, 'alias' : d.name , 'delegators': 1 ,'uptime' :99, 'votelatency' :200 , 'votingweight' : d.weight, 'cemented': d.cementedBlocks.toString() }})
 
 			this.quorumPercent = Number(quorumResponse.online_weight_quorum_percent);
 			this.onlineStake = new BigNumber(tools.convert(quorumResponse.online_stake_total, 'RAW', 'NANO')).toNumber();
@@ -110,6 +113,13 @@ export interface Subscriptions {
 	votes: Subject<Vote>;
 	confirmations: Subject<Confirmation>;
 	stoppedElections: Subject<StoppedElection>;
+}
+
+export interface BetaPrincipal {
+	name: string;
+	nanoNodeAccount: string;
+	weight : number;
+	cementedBlocks: number;
 }
 
 export interface Principal {
