@@ -1,5 +1,8 @@
 # NanoVoteVisualizer
 
+Forked from https://github.com/numsu/nano-vote-visualizer and use another node (NanoTicker) to collect stats from, as redundancy.
+Hosted at: [votes.nanos.cc](https://votes.nanos.cc)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
 ## Development server

@@ -10,8 +10,8 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class NanoWebsocketService {
 
-	wsUrl = 'wss://nanows.numsu.dev';
-	rpcUrl = 'https://nanoproxy.numsu.dev/proxy';
+	wsUrl = 'wss://websocket.nanoticker.info';
+	rpcUrl = 'https://proxy.nanos.cc/proxy';
 
 	principals: Principal[] = [];
 	principalWeights = new Map<string, number>();
