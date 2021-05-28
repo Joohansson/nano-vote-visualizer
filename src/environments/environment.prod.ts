@@ -1,10 +1,10 @@
 export const environment = {
 	production: true,
 	network: 'live',
-	wsUrl: 'wss://nanows.numsu.dev',
-	rpcUrl: 'https://nanoproxy.numsu.dev/proxy',
+	wsUrl: 'wss://websocket.nanoticker.info',
+	rpcUrl: 'https://proxy.nanos.cc/proxy',
 	principalsUrl: 'https://mynano.ninja/api/accounts/principals',
 	explorerUrl: 'https://nanolooker.com',
 	repInfoUrl: 'https://mynano.ninja',
-	hostAccount: 'nano_3zapp5z141qpjipsb1jnjdmk49jwqy58i6u6wnyrh6x7woajeyme85shxewt',
+	hostAccount: 'nano_1iuz18n4g4wfp9gf7p1s8qkygxw7wx9qfjq6a9aq68uyrdnningdcjontgar',
 };
