@@ -7,16 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2 
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
-
-      - name: Install and Build 🔧
+      - name: Install and Build Live 🔧
         run: |
           npm install
-          npm run build --prod
+          npm run build:live
+      
+      - name: Install and Build Beta 🔧
+        run: |
+          npm run build:beta
 
-      - name: Deploy 🚀
+      - name: Deploy Live and Beta 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
