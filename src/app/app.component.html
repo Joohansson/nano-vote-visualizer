@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="header">
 		<h1>{{ network == 'live' ? 'Live' : 'Beta' }} Nano election visualization ({{ network == 'live' ? 'NanoTicker PR' : 'Json PR' }})</h1>
-		<span>Every item in the visualization is a block waiting to be validated. When the quorum reaches 100%, the block is confirmed. This data is based on the perspective of a single <a [href]="'https://mynano.ninja/account/' + hostAccount" target="_blank">node</a>.</span><br>
+		<span>Every item in the visualization is a block waiting to be validated. When the quorum reaches 100%, the block is confirmed. This data is based on the perspective of a single <a [href]="repInfoUrl + '/account/' + hostAccount" target="_blank">node</a>.</span><br>
 		<span>You can change settings below to display more data. Larger time frame will degrade performance.</span><br>
 		<span *ngIf="network == 'live'">Note: The node also handle transactions which causes occasional pauses in the data.<br></span><br>
 		<div class="settings-trigger" (click)="showSettings = !showSettings"><fa-icon [icon]="showSettings ? upArrow : downArrow"></fa-icon></div>
@@ -9,9 +9,6 @@
 			<div class="setting-container">
 				<h2>Graph style</h2>
 				<div class="setting">
-					<label for="graphLines">Lines</label>
-					<input type="radio" id="graphLines" name="graphStyle" [checked]="graphStyle == 1" (input)="changeGraphStyle(1)">
-					<br>
 					<label for="graphHeatmap">Heatmap</label>
 					<input type="radio" id="graphHeatmap" name="graphStyle" [checked]="graphStyle == 2" (input)="changeGraphStyle(2)">
 				</div>
@@ -26,13 +23,13 @@
 					<label for="fps">Refresh rate (FPS): {{ fps }}</label><input id="fps" type="range" min="0" [max]="maxFps" step="1" [value]="fps" (input)="changeFps($event)" [disabled]="useMaxFPS">
 				</div>
 				<div class="setting">
-					<label for="timeframe">Graph timeframe (Minutes): {{ timeframe }}</label><input id="timeframe" type="range" min=1 [max]="maxTimeframe" step="1" [value]="timeframe" (input)="changeTimeframe($event)">
+					<label for="timeframe">Graph timeframe (Minutes): {{ timeframe }}</label><input id="timeframe" type="range" min=1 [max]="maxTimeframeMinutes" step="1" [value]="timeframe" (input)="changeTimeframe($event)">
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="electionChart"></div>
+	<d3fc-canvas id="electionChart"></d3fc-canvas>
 
 	<div class="stats-container">
 		<div class="stat-container">
